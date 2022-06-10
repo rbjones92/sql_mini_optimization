@@ -11,6 +11,17 @@ SET @v7 = 'EE';
 SET @v8 = 'MAT';
 
 -- 3. List the names of students who have taken course v4 (crsCode). 
+EXPLAIN ANALYZE
+SELECT name
+FROM student
+WHERE id IN (SELECT studID from Transcript WHERE crsCode = @v4);
+
+
+
+/*
+1	SIMPLE	trans		ALL					100	10.00	Using where
+1	SIMPLE	student		eq_ref	id_index	id_index	5	springboardopt.trans.studId	1	100.00	
+*/
 
 ### original
 /*
@@ -49,5 +60,5 @@ AND crsCode = @v4
         -> Filter: (trans.crsCode = <cache>((@v4)))  (cost=10.25 rows=10) (actual time=0.034..0.071 rows=2 loops=1)
             -> Table scan on trans  (cost=10.25 rows=100) (actual time=0.016..0.058 rows=100 loops=1)
 
-### None of these look too bad. This one included a hash join, rather than using the index. Searching more rows (400 rather that 1 in student), so gonna be slower.
+### None of these look too bad. This one included a hash join, rather than using the index. Searching more rows (400 rather than 1 in student), so gonna be slower.
 */

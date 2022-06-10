@@ -19,10 +19,10 @@ SET @v8 = 'MAT';
 # CREATE UNIQUE INDEX id_index
 # ON student(id)
 
-EXPLAIN
+EXPLAIN ANALYZE
 SELECT name 
 FROM student 
-WHERE id >= @v2 AND id >= @v3;
+WHERE id >= @v2 AND id <= @v3;
 
 -- 2. List the names of students with id in the range of v2 (id) to v3 (inclusive).
 

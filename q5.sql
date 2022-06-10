@@ -9,6 +9,8 @@ SET @v6 = 'MGT';
 SET @v7 = 'EE';			  
 SET @v8 = 'MAT';
 
+# Had some issues with the logic of the original solutions. Needs checking. 
+
 -- 5. List the names of students who have taken a course from department v6 (deptId), but not v7.
 SELECT student.name
 FROM student
